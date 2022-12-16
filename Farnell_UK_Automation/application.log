@@ -1,4 +1,0 @@
-2021-02-26 02:22:55,198  INFO [main] StepDefinition:28 - Browser is launched
-2021-02-26 02:22:55,247  INFO [main] LandingPage:50 - Accept Browser Cookies
-2021-02-26 02:22:56,483  INFO [main] StepDefinition:35 - User has successfully accepted Browser Cookies
-2021-02-26 02:22:56,494  INFO [main] LandingPage:45 - Verify Landing Page is Displayed
