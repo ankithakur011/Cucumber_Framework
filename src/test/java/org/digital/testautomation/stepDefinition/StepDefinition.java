@@ -4,6 +4,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.digital.testautomation.manager.BrowserManager;
 import org.digital.testautomation.pageobjects.LandingPage;
+import org.digital.testautomation.pageobjects.LoginPage;
 import org.digital.testautomation.pageobjects.RegistrationPage;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
@@ -20,14 +21,15 @@ import io.cucumber.java.en.Then;
 
 public class StepDefinition extends BrowserManager{
 	
-	WebDriver driver=null;
+	WebDriver driver;
 	LandingPage landingPage; 
 	RegistrationPage registrationPage;
+	LoginPage loginPage;
 	private static final Logger logger = LogManager.getLogger(StepDefinition.class);
 	
 	@Given("^user launches browser in \"([^\"]*)\"$")
 	public void user_launches_browser_in(String browserName) throws Throwable {
-		driver = BrowserManager.initialization(browserName);
+		driver = BrowserManager.getDriver(browserName);
 		logger.info("Browser is launched");
 	}
 	
@@ -41,7 +43,8 @@ public class StepDefinition extends BrowserManager{
 	@And("^user verify landing page is displayed$")
 	public void verify_Landing_Page_Is_Displayed() throws Throwable {
 		String PageTitle = landingPage.verify_Landing_Page_Is_Displayed();
-		Assert.assertTrue("Landing Page is not displayed", PageTitle.equalsIgnoreCase("Farnell"));
+		logger.info("Landing page title is: "+PageTitle);
+		Assert.assertTrue("Landing Page is not displayed", PageTitle.equalsIgnoreCase("OpenCart - Open Source Shopping Cart Solution"));
 		logger.info("Landing page is displayed");
 	}
 	
@@ -51,11 +54,24 @@ public class StepDefinition extends BrowserManager{
 		logger.info("User has successfully clicked on Register Link");
 	}
 	
+	@And("^user click on the Login link$")
+	public void user_click_on_the_login_link() throws Throwable {
+		landingPage.click_On_Login_Link();
+		logger.info("User has successfully clicked on Login Link");
+	}
+	
 	@Then("^verify title of the Registration page$")
 	public void user_verify_title_of_the_page() throws Throwable {
 		Boolean title = registrationPage.verify_Registration_Page_Is_Displayed(); 
 		Assert.assertTrue("Registration page is not displayed", title);
 		logger.info("Registration page is displayed");
+	}
+	
+	@Then("^verify title of the Login page$")
+	public void user_verify_title_of_the_login_page() throws Throwable {
+		Boolean title = loginPage.verify_Login_Page_Is_Displayed(); 
+		Assert.assertTrue("Login page is not displayed", title);
+		logger.info("Login page is displayed");
 	}
 	
 	@And("^user enter \"([^\"]*)\" and \"([^\"]*)\" on the page$")
@@ -83,6 +99,12 @@ public class StepDefinition extends BrowserManager{
 	public void user_click_on_the_button() throws Throwable {
 		registrationPage.click_on_Register_button();
 		logger.info("User has successfully clicked on Register button");
+	}
+	
+	@And("^user click on the Login button$")
+	public void user_click_on_the_Login_button() throws Throwable {
+		loginPage.click_on_Login_button();
+		logger.info("User has successfully clicked on Login button");
 	}
 	
 	@And("^user verify whether Remember is not selected$")

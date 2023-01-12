@@ -3,7 +3,6 @@ Feature: To Test Registration flow
 
   Background: 
     Given user launches browser in "Chrome"
-    And user accepts cookie policy
 	
   @Test_Id_01 @SanityTest
   Scenario Outline: Register new user with remember me as pre-selected

@@ -20,20 +20,20 @@ import org.openqa.selenium.support.ui.WebDriverWait;
  * This class will contain all the objects and method of landing page of the application
  */
 
-public class LandingPage {
+public class LandingPage extends BrowserManager{
 	
 	protected WebDriver driver;
 	protected JavascriptExecutor jsx;
 	protected WebDriverWait wait;
 	private static final Logger logger = LogManager.getLogger(LandingPage.class);
 	
-	//Initializing the Page Objects
+	//Initialising the Page Objects
 	
 	public LandingPage(WebDriver driver) {
 		this.driver = driver;
+		PageFactory.initElements(driver, this);
 		jsx = (JavascriptExecutor)driver;
 		wait = new WebDriverWait(driver, Duration.ofSeconds(30));
-		PageFactory.initElements(driver, this);
 	}
 	
 	//Page Object
@@ -41,14 +41,21 @@ public class LandingPage {
 	@FindBy (xpath = "//*[@id='mktg_Cookie_button']")
 	private WebElement cookie;
 	
+	@FindBy (xpath = "//*[@class='navbar-brand']")
+	private WebElement landingPage_title;
+	
 	@FindBy (xpath = "//*[text()='Register']")
 	private WebElement registration_link;
+	
+	@FindBy (xpath = "//*[text()='Login']")
+	private WebElement login_link;
 	
 	//Page Methods
 	
 	public String verify_Landing_Page_Is_Displayed() {
 		logger.info("Verify Landing Page is Displayed");
-		return driver.getTitle();
+		wait.until(ExpectedConditions.visibilityOf(landingPage_title));
+		return landingPage_title.getText();
 	}
 	
 	public void accept_Cookie() {
@@ -60,6 +67,12 @@ public class LandingPage {
 	
 	public void click_On_Register_Link() {
 		logger.info("User click on the Register Link");
+		wait.until(ExpectedConditions.visibilityOf(registration_link));
+		jsx.executeScript("arguments[0].click();",registration_link);
+	}
+	
+	public void click_On_Login_Link() {
+		logger.info("User click on the Login Link");
 		wait.until(ExpectedConditions.visibilityOf(registration_link));
 		jsx.executeScript("arguments[0].click();",registration_link);
 	}

@@ -18,7 +18,7 @@ import io.cucumber.junit.CucumberOptions;
         features = "Feature",
         monochrome = true,
         glue = {"org.digital.testautomation.stepDefinition"} ,
-        tags = "@Test_Id_01", 
+        tags = "@Tag", 
         dryRun = false )
 
 public class TestRunner {

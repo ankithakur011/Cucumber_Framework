@@ -4,6 +4,7 @@ import java.time.Duration;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.digital.testautomation.manager.BrowserManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -19,14 +20,14 @@ import org.openqa.selenium.support.ui.WebDriverWait;
  * This class will contain all the objects and method of Registration page of the application
  */
 
-public class RegistrationPage {
+public class RegistrationPage extends BrowserManager{
 	
 	WebDriver driver;
 	public JavascriptExecutor jsx;
 	public WebDriverWait wait;
 	private static final Logger logger = LogManager.getLogger(LandingPage.class);
 	
-	//Initializing the Page Objects
+	//Initialising the Page Objects
 	
 	public RegistrationPage(WebDriver driver) {
 		this.driver = driver;

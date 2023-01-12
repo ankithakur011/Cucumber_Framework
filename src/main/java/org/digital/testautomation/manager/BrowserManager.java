@@ -22,7 +22,7 @@ import org.openqa.selenium.ie.InternetExplorerDriver;
 
 public class BrowserManager {
 
-	public static WebDriver driver;
+	protected static WebDriver driver = null;
 	public static Properties prop;
 	private static final Logger logger = LogManager.getLogger(BrowserManager.class);
 	
@@ -39,30 +39,32 @@ public class BrowserManager {
 		  { e.printStackTrace(); }
 	  }
 	  
-	  @SuppressWarnings("deprecation")
-	public static WebDriver initialization(String browser){ 
+	@SuppressWarnings("deprecation")
+	public static WebDriver getDriver(String browser){ 
 		  
 		  String browserName = browser;
 		  try {
-			  if(browserName.equalsIgnoreCase("chrome"))
-		  		{
-				  logger.info("Chrome Driver is invoked");
-				  System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir")
-						  + "/src/main/resources/Drivers/" + "chromedriver.exe"); 
-				  //driver = new ChromeDriver();
-				  ChromeOptions options = new ChromeOptions();
-			      driver = new ChromeDriver(options);
-		  		}else if(browserName.equalsIgnoreCase("Firefox"))
-		  		{
-			  		System.setProperty("webdriver.gecko.driver", System.getProperty("user.dir") + 
-			  				"/src/main/resources/Drivers/" + "geckodriver.exe");
-			  		driver = new FirefoxDriver(); 
-		  		} 
-		  		else if(browserName.equalsIgnoreCase("IE")){
-		  			System.setProperty("webdriver.ie.driver", System.getProperty("user.dir") +
-		  					"/src/main/resources/Drivers/" + "IEDriverServer.exe");
-		  			driver = new InternetExplorerDriver(); 
-		  		}
+			  if (driver == null) {
+				  if(browserName.equalsIgnoreCase("chrome"))
+			  		{
+					  logger.info("Chrome Driver is invoked");
+					  System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir")
+							  + "/src/main/resources/Drivers/" + "chromedriver.exe"); 
+					  //driver = new ChromeDriver();
+					  ChromeOptions options = new ChromeOptions();
+				      driver = new ChromeDriver(options);
+			  		}else if(browserName.equalsIgnoreCase("Firefox"))
+			  		{
+				  		System.setProperty("webdriver.gecko.driver", System.getProperty("user.dir") + 
+				  				"/src/main/resources/Drivers/" + "geckodriver.exe");
+				  		driver = new FirefoxDriver();
+			  		} 
+			  		else if(browserName.equalsIgnoreCase("IE")){
+			  			System.setProperty("webdriver.ie.driver", System.getProperty("user.dir") +
+			  					"/src/main/resources/Drivers/" + "IEDriverServer.exe");
+			  			driver = new InternetExplorerDriver(); 
+			  		}
+			  }
 		  }
 		  catch (Exception e)
 		  {
