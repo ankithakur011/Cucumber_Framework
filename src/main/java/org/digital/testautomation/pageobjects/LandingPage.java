@@ -25,6 +25,7 @@ public class LandingPage extends BrowserManager{
 	protected WebDriver driver;
 	protected JavascriptExecutor jsx;
 	protected WebDriverWait wait;
+	LandingPage landingPage;
 	private static final Logger logger = LogManager.getLogger(LandingPage.class);
 	
 	//Initialising the Page Objects

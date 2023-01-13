@@ -22,14 +22,16 @@ import io.cucumber.java.en.Then;
 public class StepDefinition extends BrowserManager{
 	
 	WebDriver driver;
-	LandingPage landingPage; 
+	LandingPage landingPage;
 	RegistrationPage registrationPage;
 	LoginPage loginPage;
 	private static final Logger logger = LogManager.getLogger(StepDefinition.class);
 	
 	@Given("^user launches browser in \"([^\"]*)\"$")
 	public void user_launches_browser_in(String browserName) throws Throwable {
-		driver = BrowserManager.getDriver(browserName);
+		BrowserManager.setBrowser(browserName);
+		driver = BrowserManager.getDriver();
+		landingPage = new LandingPage(driver);
 		logger.info("Browser is launched");
 	}
 	
@@ -43,7 +45,7 @@ public class StepDefinition extends BrowserManager{
 	@And("^user verify landing page is displayed$")
 	public void verify_Landing_Page_Is_Displayed() throws Throwable {
 		String PageTitle = landingPage.verify_Landing_Page_Is_Displayed();
-		logger.info("Landing page title is: "+PageTitle);
+		System.out.println("Landing page title is: "+PageTitle);
 		Assert.assertTrue("Landing Page is not displayed", PageTitle.equalsIgnoreCase("OpenCart - Open Source Shopping Cart Solution"));
 		logger.info("Landing page is displayed");
 	}
