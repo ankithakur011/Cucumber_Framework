@@ -14,12 +14,18 @@ import io.cucumber.junit.CucumberOptions;
 @RunWith(Cucumber.class)
 @CucumberOptions(
         
-        plugin = {"json:target/cucumber.json","html:target/HtmlReports","pretty"}, 
-        features = "Feature",
+		features = { "src/test/resources/Features" },
+		glue = {"org.digital.testautomation.stepDefinition"} ,
+		plugin = {
+				"pretty",
+				"json:target/cucumber-reports/CucumberTestReport.json",
+				"html:target/cucumber-reports/CucumberTestReport.xml",
+				},
         monochrome = true,
-        glue = {"org.digital.testautomation.stepDefinition"} ,
-        tags = "@Tag", 
-        dryRun = false )
+        tags = "@Tag",
+        dryRun = false
+        
+	)
 
 public class TestRunner {
 

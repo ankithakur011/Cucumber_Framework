@@ -24,20 +24,21 @@ public class LoginPage extends BrowserManager{
 	WebDriver driver;
 	public JavascriptExecutor jsx;
 	public WebDriverWait wait;
+	LoginPage loginPage;
 	private static final Logger logger = LogManager.getLogger(LandingPage.class);
 	
 	//Initialising the Page Objects
 	
 	public LoginPage(WebDriver driver) {
 		this.driver = driver;
+		PageFactory.initElements(driver, this);
 		jsx = (JavascriptExecutor)driver;
 		wait = new WebDriverWait(driver, Duration.ofSeconds(30));
-		PageFactory.initElements(driver, this);
 	}
 	
 	//Page Objects
 	
-	@FindBy (xpath = "//h3[text()='Login']")
+	@FindBy (xpath = "//h1")
 	private WebElement login_Header;
 	
 	@FindBy (xpath = "//button[text()='Login'][1]")
@@ -47,7 +48,8 @@ public class LoginPage extends BrowserManager{
 	
 	public boolean verify_Login_Page_Is_Displayed() {
 		logger.info("Verify Login Page is Displayed");
-		return login_Header.getText().equals("Login");
+		logger.info("Login Header text: "+login_Header.getText());
+		return (login_Header.getText()).equalsIgnoreCase("Log in to your OpenCart account");
 	}
 	
 	public void click_on_Login_button() {

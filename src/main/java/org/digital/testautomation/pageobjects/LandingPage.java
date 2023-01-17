@@ -42,21 +42,21 @@ public class LandingPage extends BrowserManager{
 	@FindBy (xpath = "//*[@id='mktg_Cookie_button']")
 	private WebElement cookie;
 	
-	@FindBy (xpath = "//*[@class='navbar-brand']")
-	private WebElement landingPage_title;
+	@FindBy (xpath = "//h1")
+	private WebElement landingPage_header;
 	
-	@FindBy (xpath = "//*[text()='Register']")
+	@FindBy (xpath = "//*[@class='navbar-right hidden-xs']//*[text()='Register']")
 	private WebElement registration_link;
 	
-	@FindBy (xpath = "//*[text()='Login']")
+	@FindBy (xpath = "//*[@class='navbar-right hidden-xs']//*[text()='Login']")
 	private WebElement login_link;
 	
 	//Page Methods
 	
 	public String verify_Landing_Page_Is_Displayed() {
 		logger.info("Verify Landing Page is Displayed");
-		wait.until(ExpectedConditions.visibilityOf(landingPage_title));
-		return landingPage_title.getText();
+		wait.until(ExpectedConditions.visibilityOf(landingPage_header));
+		return landingPage_header.getText();
 	}
 	
 	public void accept_Cookie() {

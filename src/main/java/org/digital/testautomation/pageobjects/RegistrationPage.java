@@ -25,6 +25,7 @@ public class RegistrationPage extends BrowserManager{
 	WebDriver driver;
 	public JavascriptExecutor jsx;
 	public WebDriverWait wait;
+	RegistrationPage registrationPage;
 	private static final Logger logger = LogManager.getLogger(LandingPage.class);
 	
 	//Initialising the Page Objects
