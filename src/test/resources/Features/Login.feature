@@ -9,7 +9,6 @@ Feature: To test Login functionality
     Then verify title of the Login page
     And user enter "<email>" and "<password>" on the page
     And user click on the Login button
-    And close browser
 		
     Examples: 
       | email 								| password  |

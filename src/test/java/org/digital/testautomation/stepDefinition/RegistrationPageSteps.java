@@ -3,8 +3,6 @@ package org.digital.testautomation.stepDefinition;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.digital.testautomation.manager.BrowserManager;
-import org.digital.testautomation.pageobjects.LandingPage;
-import org.digital.testautomation.pageobjects.LoginPage;
 import org.digital.testautomation.pageobjects.RegistrationPage;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
@@ -19,60 +17,17 @@ import io.cucumber.java.en.Then;
  * This class will contain the step definition of the cucumber steps
  */
 
-public class StepDefinition extends BrowserManager{
+public class RegistrationPageSteps extends BrowserManager{
 	
 	WebDriver driver = BrowserManager.getDriver();
-	LandingPage landingPage = new LandingPage(driver);
 	RegistrationPage registrationPage = new RegistrationPage(driver);
-	LoginPage loginPage = new LoginPage(driver);
-	private static final Logger logger = LogManager.getLogger(StepDefinition.class);
-	
-	@Given("^user launches browser in \"([^\"]*)\"$")
-	public void user_launches_browser_in(String browserName) throws Throwable {
-		BrowserManager.setBrowser(browserName);
-		//driver = BrowserManager.getDriver();
-		//landingPage = new LandingPage(driver);
-		logger.info("Browser is launched");
-	}
-	
-	@And("^user accepts cookie policy$")
-	public void user_accepts_cookie_policy() throws Throwable {
-		landingPage = new LandingPage(driver);
-		landingPage.accept_Cookie();
-		logger.info("User has successfully accepted Browser Cookies");
-	}
-	
-	@And("^user verify landing page is displayed$")
-	public void verify_Landing_Page_Is_Displayed() throws Throwable {
-		String PageTitle = landingPage.verify_Landing_Page_Is_Displayed();
-		System.out.println("Landing page title is: "+PageTitle);
-		//Assert.assertTrue("Landing Page is not displayed", PageTitle.equalsIgnoreCase("OpenCart - Open Source Shopping Cart Solution"));
-		logger.info("Landing page is displayed");
-	}
-	
-	@And("^user click on the Register link$")
-	public void user_click_on_the_register_link() throws Throwable {
-		landingPage.click_On_Register_Link();
-		logger.info("User has successfully clicked on Register Link");
-	}
-	
-	@And("^user click on the Login link$")
-	public void user_click_on_the_login_link() throws Throwable {
-		landingPage.click_On_Login_Link();
-		logger.info("User has successfully clicked on Login Link");
-	}
+	private static final Logger logger = LogManager.getLogger(RegistrationPageSteps.class);
 	
 	@Then("^verify title of the Registration page$")
 	public void user_verify_title_of_the_page() throws Throwable {
 		Boolean title = registrationPage.verify_Registration_Page_Is_Displayed(); 
 		Assert.assertTrue("Registration page is not displayed", title);
 		logger.info("Registration page is displayed");
-	}
-	
-	@Then("^verify title of the Login page$")
-	public void user_verify_title_of_the_login_page() throws Throwable {
-		Assert.assertTrue("Login page is not displayed", loginPage.verify_Login_Page_Is_Displayed());
-		logger.info("Login page is displayed");
 	}
 	
 	@And("^user enter \"([^\"]*)\" and \"([^\"]*)\" on the page$")
@@ -102,12 +57,6 @@ public class StepDefinition extends BrowserManager{
 		logger.info("User has successfully clicked on Register button");
 	}
 	
-	@And("^user click on the Login button$")
-	public void user_click_on_the_Login_button() throws Throwable {
-		loginPage.click_on_Login_button();
-		logger.info("User has successfully clicked on Login button");
-	}
-	
 	@And("^user verify whether Remember is not selected$")
 	public void user_verify_whether_Remember_is_not_selected() throws Throwable {
 	    Boolean isChecked = registrationPage.verify_Remember_Me_is_selected(); 
@@ -126,18 +75,6 @@ public class StepDefinition extends BrowserManager{
 		String username =  registrationPage.verify_username_after_registration();
 		Assert.assertTrue("User name is incorrect",username.equalsIgnoreCase("Ankit"));
 		logger.info("User has successfully logged In");
-	}
-	
-	@Then("^throw successful logged in alert$")
-	public void throw_successful_logged_in_alert() throws Throwable {
-		landingPage.triggerAlert("You are successfully logged in");
-	    logger.info("User has been displayed with alert message of successful login");
-	}
-	
-	@Then("^close browser$")
-	public void close_browser() throws Throwable {
-		BrowserManager.closeAllBrowser();
-		logger.info("Browser is closed");
 	}
 	
 }

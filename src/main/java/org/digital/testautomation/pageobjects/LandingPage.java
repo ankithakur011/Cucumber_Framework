@@ -28,6 +28,8 @@ public class LandingPage extends BrowserManager{
 	LandingPage landingPage;
 	private static final Logger logger = LogManager.getLogger(LandingPage.class);
 	
+	public static ThreadLocal<WebDriver> tlDriver = new ThreadLocal<>();
+	
 	//Initialising the Page Objects
 	
 	public LandingPage(WebDriver driver) {
